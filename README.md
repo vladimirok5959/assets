@@ -40,4 +40,4 @@ You can include CSS or JS files from internet into local file by `import()` comm
 }
 ```
 
-In the result you will get combined and minified CSS file without `.dev.` suffix. And the same works for JS files. Note: for reducing http requests `/.cache/` directory is used. Run `make assets-clear-cache` for clearing cached files
+In the result you will get combined and minified CSS file without `.dev.` suffix. And the same works for JS files. Note: for reducing http requests `/.cache/` directory is used. Run `make assets-clear-cache` to clear cached files
