@@ -27,7 +27,7 @@ Add to gitignore file:
 assets.sh
 ```
 
-Keep your CSS and JS files with `*.dev.css` and `*.dev.js` suffix. Run `make assets` command to process all finded files
+Keep your CSS and JS files with `*.dev.css` and `*.dev.js` suffix. Run `make assets` command to process all finded files starting recursively from your makefile (root project) directory
 
 You can include CSS or JS files from internet into local file by `import()` command inside CSS or JS file. Check `/test/` directory and `/test/test.dev.css` file. For example:
 
