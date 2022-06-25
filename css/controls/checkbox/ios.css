@@ -1,9 +1,13 @@
 .checkbox-ios {
+	box-sizing: border-box;
 	display: inline-block;
+	height: 20px;
 	vertical-align: middle;
+	width: 35px;
 }
 
 .checkbox-ios input[type=checkbox] {
+	box-sizing: border-box;
 	max-height: 0;
 	max-width: 0;
 	opacity: 0;
@@ -13,6 +17,7 @@
 .checkbox-ios input[type=checkbox] + label {
 	border-radius: 24px;
 	border: 2px solid #18181b;
+	box-sizing: border-box;
 	cursor: pointer;
 	display: block;
 	height: 20px;
@@ -26,6 +31,7 @@
 .checkbox-ios input[type=checkbox] + label:before {
 	background: #18181b;
 	border-radius: 24px;
+	box-sizing: border-box;
 	content: "";
 	display: block;
 	height: 12px;
@@ -37,11 +43,13 @@
 }
 
 .checkbox-ios input[type=checkbox]:checked + label {
-	border-color: #772ce8;
+	border-color: #000;
+	box-sizing: border-box;
 }
 
 .checkbox-ios input[type=checkbox]:checked + label:before {
-	background: #772ce8;
+	background: #000;
+	box-sizing: border-box;
 	left: 17px;
 }
 
@@ -49,6 +57,7 @@
 	border-color: #18181b;
 	border-style: solid;
 	border-width: 0px 0px 2px 2px;
+	box-sizing: border-box;
 	content: "";
 	display: block;
 	height: 5px;
@@ -62,6 +71,59 @@
 }
 
 .checkbox-ios input[type=checkbox]:checked + label:after {
-	border-color: #772ce8;
+	border-color: #000;
+	box-sizing: border-box;
 	opacity: 1;
+}
+
+/* Blue */
+.checkbox-ios.blue input[type=checkbox]:checked + label {
+	border-color: #007bff;
+}
+
+.checkbox-ios.blue input[type=checkbox]:checked + label:before {
+	background: #007bff;
+}
+
+.checkbox-ios.blue input[type=checkbox]:checked + label:after {
+	border-color: #007bff;
+}
+
+/* Green */
+.checkbox-ios.green input[type=checkbox]:checked + label {
+	border-color: #28a745;
+}
+
+.checkbox-ios.green input[type=checkbox]:checked + label:before {
+	background: #28a745;
+}
+
+.checkbox-ios.green input[type=checkbox]:checked + label:after {
+	border-color: #28a745;
+}
+
+/* Red */
+.checkbox-ios.red input[type=checkbox]:checked + label {
+	border-color: #dc3545;
+}
+
+.checkbox-ios.red input[type=checkbox]:checked + label:before {
+	background: #dc3545;
+}
+
+.checkbox-ios.red input[type=checkbox]:checked + label:after {
+	border-color: #dc3545;
+}
+
+/* White */
+.checkbox-ios.white input[type=checkbox]:checked + label {
+	border-color: #fff;
+}
+
+.checkbox-ios.white input[type=checkbox]:checked + label:before {
+	background: #fff;
+}
+
+.checkbox-ios.white input[type=checkbox]:checked + label:after {
+	border-color: #fff;
 }
