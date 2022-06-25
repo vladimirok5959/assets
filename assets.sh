@@ -39,7 +39,7 @@ if [[ ! -d "${CURRENT_DIR}/.cache" ]]; then
 fi
 
 IFS=""
-while read line; do
+while read -r line; do
 	if [[ ${line} == "/*"* ]]; then
 		if [[ ${line} == *"*/" ]]; then
 			if [[ ${line} == *"import("* ]]; then
