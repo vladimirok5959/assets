@@ -33,6 +33,11 @@ if [[ -f "${TARGET_FILE}" ]]; then
 fi
 touch ${TARGET_FILE}
 
+# Create cache dir if not exists
+if [[ ! -d "${CURRENT_DIR}/.cache" ]]; then
+	mkdir "${CURRENT_DIR}/.cache"
+fi
+
 IFS=""
 while read line; do
 	if [[ ${line} == "/*"* ]]; then
