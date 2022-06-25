@@ -11,8 +11,12 @@ fi
 
 # Check if target file is set
 if [[ "${TARGET_FILE}" = "" ]]; then
-    echo "Target file is not set"
-    exit 1
+    # Try to generate from source file name
+    TARGET_FILE=$(echo "${SOURCE_FILE}" | sed 's/\.dev\.\(css\|js\)$/.\1/')
+    if [[ "${TARGET_FILE}" = "" ]]; then
+        echo "Target file is not set"
+        exit 1
+    fi
 fi
 
 # Check if source file exists
