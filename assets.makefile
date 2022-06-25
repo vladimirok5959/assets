@@ -15,12 +15,15 @@ ifndef CHECK_YUI_COMPRESSOR
     $(error "yui-compressor is not installed")
 endif
 
---assets-css: --check-yui-compressor
+--check-assets-sh-file:
+	test -f assets.sh || curl -fsSL -o assets.sh https://raw.githubusercontent.com/vladimirok5959/assets/main/assets.sh
+
+--assets-css: --check-yui-compressor --check-assets-sh-file
 	@for file in ${FILES_CSS}; do \
 		${CURRENT_DIR}/assets.sh $${file}; \
 	done
 
---assets-js: --check-yui-compressor
+--assets-js: --check-yui-compressor --check-assets-sh-file
 	@for file in ${FILES_JS}; do \
 		${CURRENT_DIR}/assets.sh $${file}; \
 	done
