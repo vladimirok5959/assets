@@ -42,6 +42,11 @@
 	border-color: #212529;
 }
 
+.checkbox-ios input[type=checkbox]:focus + label {
+	box-shadow: 0 0 0 0.25rem rgb(13 110 253 / 25%);
+	outline: 0;
+}
+
 .checkbox-ios input[type=checkbox]:checked + label:before {
 	background: #212529;
 	left: 17px;
@@ -73,6 +78,10 @@
 	border-color: #007bff;
 }
 
+.checkbox-ios.blue input[type=checkbox]:focus + label {
+	box-shadow: 0 0 0 0.25rem rgb(49 132 253 / 50%);
+}
+
 .checkbox-ios.blue input[type=checkbox]:checked + label:before {
 	background: #007bff;
 }
@@ -84,6 +93,10 @@
 /* Green */
 .checkbox-ios.green input[type=checkbox]:checked + label {
 	border-color: #28a745;
+}
+
+.checkbox-ios.green input[type=checkbox]:focus + label {
+	box-shadow: 0 0 0 0.25rem rgb(60 153 110 / 50%);
 }
 
 .checkbox-ios.green input[type=checkbox]:checked + label:before {
@@ -99,6 +112,10 @@
 	border-color: #dc3545;
 }
 
+.checkbox-ios.red input[type=checkbox]:focus + label {
+	box-shadow: 0 0 0 0.25rem rgb(225 83 97 / 50%);
+}
+
 .checkbox-ios.red input[type=checkbox]:checked + label:before {
 	background: #dc3545;
 }
@@ -110,6 +127,10 @@
 /* White */
 .checkbox-ios.white input[type=checkbox]:checked + label {
 	border-color: #fff;
+}
+
+.checkbox-ios.white input[type=checkbox]:focus + label {
+	box-shadow: 0 0 0 0.25rem rgb(211 212 213 / 50%);
 }
 
 .checkbox-ios.white input[type=checkbox]:checked + label:before {
