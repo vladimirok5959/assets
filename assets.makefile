@@ -32,3 +32,4 @@ assets: --assets-css --assets-js
 
 assets-clear-cache:
 	@find ${CURRENT_DIR}/.cache/ -type f -not -name '.keep' -delete
+	rm ${CURRENT_DIR}/assets.sh
