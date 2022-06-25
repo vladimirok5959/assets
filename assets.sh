@@ -49,3 +49,11 @@ while read line; do
         echo "${line}" >> ${TARGET_FILE}
     fi
 done < ${SOURCE_FILE}
+
+# Minify target file (CSS, JS)
+# Install yui-compressor by command:
+# sudo apt-get install yui-compressor
+CHECK_YUI_COMPRESSOR=$(command -v yui-compressor 2> /dev/null)
+if [[ "${CHECK_YUI_COMPRESSOR}" != "" ]]; then
+    yui-compressor ${TARGET_FILE} -o ${TARGET_FILE}
+fi
