@@ -1,6 +1,6 @@
 # assets
 
-Collection of web assets for reuse in other projects
+Collection of web assets for reuse in other projects. The main goal of all of this, it's making to possible import and reuse CSS and JS code for usual CSS and JS files, without any of something like Sass for CSS or NodeJs for JS, just simple CSS/JS and unix utilites. Additionaly `yui-compressor` utility is used for files minification. It's used by default and don't works without `yui-compressor` but you can modify makefile `assets.makefile` and remove `--check-yui-compressor` target everywhere
 
 ## How to use
 
