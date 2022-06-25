@@ -16,7 +16,7 @@ ifndef CHECK_YUI_COMPRESSOR
 endif
 
 --check-assets-sh-file:
-	@test -f assets.sh || curl -fsSL -o assets.sh https://raw.githubusercontent.com/vladimirok5959/assets/main/assets.sh; chmod +x assets.sh
+	@test -f assets.sh || (curl -fsSL -o assets.sh https://raw.githubusercontent.com/vladimirok5959/assets/main/assets.sh && chmod +x assets.sh)
 
 --assets-css: --check-yui-compressor --check-assets-sh-file
 	@for file in ${FILES_CSS}; do \
