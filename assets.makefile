@@ -10,10 +10,10 @@ FILES_CSS := $(shell find ${CURRENT_DIR} -type f -name '*.dev.css')
 FILES_JS := $(shell find ${CURRENT_DIR} -type f -name '*.dev.js')
 
 --check-yui-compressor:
-ifndef CHECK_YUI_COMPRESSOR
-	# sudo apt-get install yui-compressor
-    $(error "yui-compressor is not installed")
-endif
+	ifndef CHECK_YUI_COMPRESSOR
+		# sudo apt-get install yui-compressor
+		$(error "yui-compressor is not installed")
+	endif
 
 --check-assets-sh-file:
 	@test -f assets.sh || (curl -fsSL -o assets.sh https://raw.githubusercontent.com/vladimirok5959/assets/main/assets.sh && chmod +x assets.sh)
