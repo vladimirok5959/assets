@@ -1,0 +1,11 @@
+.radio-circle.blue input[type=radio]:checked + label {
+	border-color: #007bff;
+}
+
+.radio-circle.blue input[type=radio]:focus + label {
+	box-shadow: 0 0 0 0.25rem rgb(49 132 253 / 50%);
+}
+
+.radio-circle.blue input[type=radio]:checked + label:before {
+	background: #007bff;
+}
