@@ -1,0 +1,11 @@
+.checkbox-circle.red input[type=checkbox]:checked + label {
+	border-color: #dc3545;
+}
+
+.checkbox-circle.red input[type=checkbox]:focus + label {
+	box-shadow: 0 0 0 0.25rem rgb(225 83 97 / 50%);
+}
+
+.checkbox-circle.red input[type=checkbox]:checked + label:before {
+	background: #dc3545;
+}

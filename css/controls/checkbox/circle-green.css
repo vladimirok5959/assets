@@ -1,0 +1,11 @@
+.checkbox-circle.green input[type=checkbox]:checked + label {
+	border-color: #28a745;
+}
+
+.checkbox-circle.green input[type=checkbox]:focus + label {
+	box-shadow: 0 0 0 0.25rem rgb(60 153 110 / 50%);
+}
+
+.checkbox-circle.green input[type=checkbox]:checked + label:before {
+	background: #28a745;
+}
