@@ -1,0 +1,11 @@
+.checkbox-box.blue input[type=checkbox]:checked + label {
+	border-color: #007bff;
+}
+
+.checkbox-box.blue input[type=checkbox]:focus + label {
+	box-shadow: 0 0 0 0.25rem rgb(49 132 253 / 50%);
+}
+
+.checkbox-box.blue input[type=checkbox]:checked + label:before {
+	border-color: #007bff;
+}
