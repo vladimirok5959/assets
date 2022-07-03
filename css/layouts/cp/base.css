@@ -40,6 +40,22 @@ body.cp.loading header:before {
 	z-index: 1;
 }
 
+body.cp header .sidebar,
+body.cp header .content {
+	height: 100%;
+	position: relative;
+	vertical-align: top;
+}
+
+body.cp header .sidebar {
+	float: left;
+	width: 250px;
+}
+
+body.cp header .sidebar.right {
+	float: right;
+}
+
 body.cp .wrap {
 	align-items: stretch;
 	display: block;
@@ -65,10 +81,6 @@ body.cp .wrap .sidebar {
 	background: #eee;
 	float: left;
 	width: 250px;
-}
-
-body.cp .wrap .sidebar.left {
-	float: left;
 }
 
 body.cp .wrap .sidebar.right {
