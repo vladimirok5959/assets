@@ -56,6 +56,11 @@ body.cp header .wrap .content {
 	height: 100%;
 	position: relative;
 	vertical-align: top;
+	z-index: 2;
+}
+
+body.cp header .wrap .content {
+	z-index: 1;
 }
 
 body.cp header .wrap .sidebar {
