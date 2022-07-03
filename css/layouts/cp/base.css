@@ -43,31 +43,31 @@ body.cp.loading header:before {
 	animation: loading-movement 2s linear infinite;
 }
 
-body.cp header .sidebar,
-body.cp header .content {
+body.cp header .wrap .sidebar,
+body.cp header .wrap .content {
 	height: 100%;
 	position: relative;
 	vertical-align: top;
 }
 
-body.cp header .sidebar {
+body.cp header .wrap .sidebar {
 	float: left;
 	width: 250px;
 }
 
-body.cp header .sidebar.right {
+body.cp header .wrap .sidebar.right {
 	float: right;
 }
 
-body.cp .wrap {
+body.cp .body .wrap {
 	align-items: stretch;
 	display: block;
 	height: 100%;
 	width: 100%;
 }
 
-body.cp .wrap .sidebar,
-body.cp .wrap .content {
+body.cp .body .wrap .sidebar,
+body.cp .body .wrap .content {
 	box-shadow: 0 3px 5px rgb(0 0 0 / 30%);
 	height: 100%;
 	padding-top: 56px;
@@ -76,28 +76,28 @@ body.cp .wrap .content {
 	z-index: 2;
 }
 
-body.cp .wrap .content {
+body.cp .body .wrap .content {
 	z-index: 1;
 }
 
-body.cp .wrap .sidebar {
+body.cp .body .wrap .sidebar {
 	background: #eee;
 	float: left;
 	width: 250px;
 }
 
-body.cp .wrap .sidebar.right {
+body.cp .body .wrap .sidebar.right {
 	float: right;
 }
 
-body.cp .wrap .sidebar .scroll,
-body.cp .wrap .content .scroll {
+body.cp .body .wrap .sidebar .scroll,
+body.cp .body .wrap .content .scroll {
 	height: 100%;
 	overflow: hidden;
 	overflow-y: auto;
 }
 
-body.cp .wrap .sidebar .scroll .padding,
-body.cp .wrap .content .scroll .padding {
+body.cp .body .wrap .sidebar .scroll .padding,
+body.cp .body .wrap .content .scroll .padding {
 	padding: 16px;
 }
