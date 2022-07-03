@@ -8,6 +8,7 @@ body.cp {
 
 body.cp header {
 	background-color: #1e375a;
+	box-shadow: 0 3px 5px rgb(0 0 0 / 30%);
 	color: #fff;
 	height: 56px;
 	left: 0;
@@ -26,7 +27,7 @@ body.cp .wrap {
 
 body.cp .wrap .sidebar,
 body.cp .wrap .content {
-	box-shadow: 0 0px 5px rgb(0 0 0 / 30%);
+	box-shadow: 0 3px 5px rgb(0 0 0 / 30%);
 	height: 100%;
 	padding-top: 56px;
 	position: relative;
