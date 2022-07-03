@@ -42,6 +42,13 @@ body.cp.loading header:before {
 	animation: loading-movement 2s linear infinite;
 }
 
+body.cp header .wrap {
+	align-items: stretch;
+	display: block;
+	height: 100%;
+	width: 100%;
+}
+
 body.cp header .wrap .sidebar,
 body.cp header .wrap .content {
 	height: 100%;
@@ -58,6 +65,7 @@ body.cp header .wrap .sidebar.right {
 	float: right;
 }
 
+body.cp .body,
 body.cp .body .wrap {
 	align-items: stretch;
 	display: block;
