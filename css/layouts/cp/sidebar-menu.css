@@ -1,0 +1,77 @@
+body.cp .body .wrap .sidebar.left .scroll .padding {
+	padding: 0;
+}
+
+.nav,
+.nav li {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.nav {
+	padding: 16px 0;
+}
+
+.nav li,
+.nav li a {
+	color: #444;
+}
+
+.nav li a {
+	display: block;
+	padding: 8px 16px;
+	text-decoration: none;
+}
+
+.nav li .nav {
+	background-color: #eee;
+	padding: 0;
+}
+
+.nav li:hover {
+	background-color: #e7e7e7;
+}
+
+.nav li.active {
+	background-color: #417cb9;
+}
+
+.nav li.active,
+.nav li.active a {
+	color: #fff;
+}
+
+/* Level 2 */
+
+.nav li .nav li a {
+	color: #444;
+	padding-left: 32px;
+}
+
+.nav li .nav li.active {
+	background-color: #e7e7e7;
+}
+
+.nav li .nav li.active,
+.nav li .nav li.active a {
+	color: #417cb9;
+}
+
+/* Level 3 */
+
+.nav li .nav li .nav li a {
+	padding-left: 48px;
+}
+
+/* Level 4 */
+
+.nav li .nav li .nav li .nav li a {
+	padding-left: 64px;
+}
+
+/* Level 5 */
+
+.nav li .nav li .nav li .nav li .nav li a {
+	padding-left: 80px;
+}

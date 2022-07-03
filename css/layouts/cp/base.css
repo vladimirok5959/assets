@@ -107,3 +107,9 @@ body.cp .body .wrap .sidebar .scroll .padding,
 body.cp .body .wrap .content .scroll .padding {
 	padding: 16px;
 }
+
+.divider {
+	border-top: 1px solid #d6d6d6;
+	height: 0;
+	overflow: hidden;
+}
