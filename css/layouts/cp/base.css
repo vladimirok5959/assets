@@ -1,0 +1,65 @@
+body.cp {
+	color: #1e375a;
+	height: 100%;
+	overflow: hidden;
+	position: relative;
+	width: 100%;
+}
+
+body.cp header {
+	background-color: #1e375a;
+	color: #fff;
+	height: 56px;
+	left: 0;
+	position: fixed;
+	right: 0;
+	top: 0;
+	z-index: 3;
+}
+
+body.cp .wrap {
+	align-items: stretch;
+	display: block;
+	height: 100%;
+	width: 100%;
+}
+
+body.cp .wrap .sidebar,
+body.cp .wrap .content {
+	box-shadow: 0 0px 5px rgb(0 0 0 / 30%);
+	height: 100%;
+	padding-top: 56px;
+	position: relative;
+	vertical-align: top;
+	z-index: 2;
+}
+
+body.cp .wrap .content {
+	z-index: 1;
+}
+
+body.cp .wrap .sidebar {
+	background: #eee;
+	float: left;
+	width: 250px;
+}
+
+body.cp .wrap .sidebar.left {
+	float: left;
+}
+
+body.cp .wrap .sidebar.right {
+	float: right;
+}
+
+body.cp .wrap .sidebar .scroll,
+body.cp .wrap .content .scroll {
+	height: 100%;
+	overflow: hidden;
+	overflow-y: auto;
+}
+
+body.cp .wrap .sidebar .scroll .padding,
+body.cp .wrap .content .scroll .padding {
+	padding: 16px;
+}
