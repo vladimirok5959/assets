@@ -46,7 +46,9 @@ body.cp header .wrap {
 	align-items: stretch;
 	display: block;
 	height: 100%;
+	position: relative;
 	width: 100%;
+	z-index: 2;
 }
 
 body.cp header .wrap .sidebar,
