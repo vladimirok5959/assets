@@ -27,7 +27,7 @@ body.cp header {
 }
 
 body.cp header:before {
-	background-image: linear-gradient(45deg, hsla(0, 0%, 100%, .05) 25%, transparent 0, transparent 50%, hsla(0, 0%, 100%, .05) 0, hsla(0, 0%, 100%, .05) 75%, transparent 0, transparent);
+	background-image: linear-gradient(45deg, #28598a 25%, transparent 0, transparent 50%, #28598a 0, #28598a 75%, transparent 0, transparent);
 	background-size: 50px 50px;
 	bottom: 0;
 	content: "";
