@@ -7,7 +7,7 @@ body.cp {
 }
 
 body.cp header {
-	background-color: #1e375a;
+	background-color: #205081;
 	box-shadow: 0 3px 5px rgb(0 0 0 / 30%);
 	color: #fff;
 	height: 56px;
@@ -23,13 +23,12 @@ body.cp header {
 		background-position: 0 0;
 	}
 	to {
-		background-position: 50px 50px;
+		background-position: 50px 0px;
 	}
 }
 
-body.cp.loading header:before {
-	animation: loading-movement 2s linear infinite;
-	background-image: linear-gradient(-45deg, hsla(0, 0%, 100%, .05) 25%, transparent 0, transparent 50%, hsla(0, 0%, 100%, .05) 0, hsla(0, 0%, 100%, .05) 75%, transparent 0, transparent);
+body.cp header:before {
+	background-image: linear-gradient(45deg, hsla(0, 0%, 100%, .05) 25%, transparent 0, transparent 50%, hsla(0, 0%, 100%, .05) 0, hsla(0, 0%, 100%, .05) 75%, transparent 0, transparent);
 	background-size: 50px 50px;
 	bottom: 0;
 	content: "";
@@ -38,6 +37,10 @@ body.cp.loading header:before {
 	right: 0;
 	top: 0;
 	z-index: 1;
+}
+
+body.cp.loading header:before {
+	animation: loading-movement 2s linear infinite;
 }
 
 body.cp header .sidebar,
