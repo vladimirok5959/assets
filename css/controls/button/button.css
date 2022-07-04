@@ -67,7 +67,7 @@
 }
 
 .btn.red:hover {
-	background-color: #c84451;
+	background-color: #d45562;
 	border-color: #b02a37;
 }
 
@@ -83,7 +83,7 @@
 }
 
 .btn.white:hover {
-	background-color: #f9fafb;
+	background-color: #cbcbcb;
 	border-color: #f9fafb;
 	color: #000;
 }
