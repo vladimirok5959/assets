@@ -10,7 +10,7 @@
 	padding: 6px 12px;
 	text-align: center;
 	text-decoration: none;
-	transition: all .15s ease-in-out;
+	transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 	user-select: none;
 	vertical-align: middle;
 	white-space: nowrap;
@@ -67,7 +67,7 @@
 }
 
 .btn.red:hover {
-	background-color: #bb2d3b;
+	background-color: #c84451;
 	border-color: #b02a37;
 }
 
