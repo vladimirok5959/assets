@@ -151,6 +151,17 @@ ajax.processTags = function() {
 	};
 };
 
+ajax.reloadTag = function(tag) {
+	ajax.processTag(tag);
+};
+
+ajax.reloadTagById = function(id) {
+	var tag = document.getElementById(id)
+	if(tag != null) {
+		ajax.reloadTag(tag);
+	};
+};
+
 if(window.attachEvent) {
 	window.attachEvent('onload', ajax.processTags);
 } else if(window.addEventListener) {
