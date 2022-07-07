@@ -1,3 +1,6 @@
+function AjaxErrorBadStatusCode(message) { this.name = 'AjaxErrorBadStatusCode'; this.message = message; };
+AjaxErrorBadStatusCode.prototype = new Error();
+
 var ajax = {};
 ajax.create = function() {
 	if(typeof XMLHttpRequest !== 'undefined') {
@@ -50,6 +53,30 @@ ajax.get = function(url, data, callback, async) {
 		query.push(encodeURIComponent(key) + '=' + encodeURIComponent(data[key]));
 	};
 	ajax.send(url + (query.length ? '?' + query.join('&') : ''), callback, 'GET', null, async);
+};
+
+ajax.getJSON = function(url, data, callbackSuccess, callbackError, async) {
+	ajax.get(url, data, function(method, data, readyState, status, responseText) {
+		if(readyState == 4) {
+			if(status == 200) {
+				try {
+					var r = JSON.parse(responseText);
+					if(callbackSuccess) {
+						callbackSuccess(method, data, readyState, status, r);
+					};
+				} catch(e) {
+					if(error) {
+						error(method, data, readyState, status, e);
+					};
+				};
+			} else {
+				if(callbackError) {
+					var e = new AjaxErrorBadStatusCode('Bad status code '+status);
+					callbackError(method, data, readyState, status, e);
+				};
+			};
+		};
+	}, async);
 };
 
 ajax.post = function(url, data, callback, async) {
