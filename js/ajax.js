@@ -103,7 +103,7 @@ ajax.removeClass = function(obj, className) {
 	};
 };
 
-ajax.processTag = function(tag, url, func) {
+ajax.loadTag = function(tag, url, func) {
 	if(typeof window[func] === 'function') {
 		if(!ajax.hasClass(tag, 'loading')) {
 			ajax.addClass(tag, 'loading');
@@ -116,7 +116,7 @@ ajax.processTag = function(tag, url, func) {
 					var resp = window[func](tag, responseData);
 					tag.innerHTML = resp;
 				} catch(e) {
-					console.log('ajax.processTag', 'e', e);
+					console.log('ajax.loadTag', 'e', e);
 				};
 				ajax.removeClass(tag, 'loading');
 			}, function(method, data, readyState, status, responseData) {
@@ -128,22 +128,26 @@ ajax.processTag = function(tag, url, func) {
 	};
 };
 
+ajax.processTag = function(tag) {
+	var get = tag.getAttribute('data-ajax-get');
+	var func = tag.getAttribute('data-ajax-func');
+	var delay = tag.getAttribute('data-ajax-delay');
+	if(get && get != null && func && func != null) {
+		if(delay == null) {
+			ajax.loadTag(tag, get, func);
+		} else {
+			setTimeout(function() {
+				ajax.loadTag(tag, get, func);
+			}, delay);
+		};
+	};
+};
+
 ajax.processTags = function() {
 	var tags = document.querySelectorAll('[data-ajax-get]');
 	for(var key in tags) if(tags.hasOwnProperty(key)) {
 		var tag = tags[key];
-		var get = tag.getAttribute('data-ajax-get');
-		var func = tag.getAttribute('data-ajax-func');
-		var delay = tag.getAttribute('data-ajax-delay');
-		if(get && get != null && func && func != null) {
-			if(delay == null) {
-				ajax.processTag(tag, get, func);
-			} else {
-				setTimeout(function() {
-					ajax.processTag(tag, get, func);
-				}, delay);
-			};
-		};
+		ajax.processTag(tag);
 	};
 };
 
