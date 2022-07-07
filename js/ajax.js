@@ -65,8 +65,8 @@ ajax.getJSON = function(url, data, callbackSuccess, callbackError, async) {
 						callbackSuccess(method, data, readyState, status, r);
 					};
 				} catch(e) {
-					if(error) {
-						error(method, data, readyState, status, e);
+					if(callbackError) {
+						callbackError(method, data, readyState, status, e);
 					};
 				};
 			} else {
