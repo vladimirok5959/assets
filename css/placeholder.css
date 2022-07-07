@@ -1,0 +1,13 @@
+@keyframes placeholder {
+	0% { opacity: 0.5; }
+	33% { opacity: 1; }
+	66% { opacity: 0.5; }
+	100% { opacity: 1; }
+}
+
+.placeholder {
+	animation: placeholder 1s infinite !important;
+	background: #eceeec !important;
+	border-radius: 3px !important;
+	min-height: 16px;
+}
