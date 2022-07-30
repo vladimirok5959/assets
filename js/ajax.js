@@ -87,14 +87,18 @@ ajax.post = function(url, data, callback, async) {
 	ajax.send(url, callback, 'POST', query.join('&'), async);
 };
 
-ajax.loadTag = function(tag, url, func) {
-	if(typeof window[func] === 'function') {
+ajax.loadTag = function(tag, url, func, field) {
+	if((typeof window[func] === 'function') || field != null) {
 		if(!!!tag.className.match(new RegExp('(\\s|^)loading(\\s|$)'))) {
 			tag.className += " loading";
 			ajax.getJSON(url, {}, function(method, data, readyState, status, responseData) {
 				try {
-					var resp = window[func](tag, responseData);
-					tag.innerHTML = resp;
+					if(typeof window[func] === 'function') {
+						var html = window[func](tag, responseData);
+						tag.innerHTML = html;
+					} else if(field != null) {
+						tag.innerHTML = responseData[field];
+					};
 				} catch(e) {
 					console.log('ajax.loadTag', 'e', e);
 				};
@@ -109,13 +113,14 @@ ajax.loadTag = function(tag, url, func) {
 ajax.processTag = function(tag) {
 	var get = tag.getAttribute('data-ajax-get');
 	var func = tag.getAttribute('data-ajax-func');
+	var field = tag.getAttribute('data-ajax-field');
 	var delay = tag.getAttribute('data-ajax-delay');
 	if(get && get != null && func && func != null) {
 		if(delay == null) {
 			ajax.loadTag(tag, get, func);
 		} else {
 			setTimeout(function() {
-				ajax.loadTag(tag, get, func);
+				ajax.loadTag(tag, get, func, field);
 			}, delay);
 		};
 	};
