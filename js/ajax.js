@@ -91,11 +91,7 @@ ajax.loadTag = function(tag, url, func) {
 	if(typeof window[func] === 'function') {
 		if(!!!tag.className.match(new RegExp('(\\s|^)loading(\\s|$)'))) {
 			tag.className += " loading";
-			// var body = document.getElementsByTagName('body');
-			// if(body.length >= 1) { ajax.addClass(body[0], 'loading'); };
 			ajax.getJSON(url, {}, function(method, data, readyState, status, responseData) {
-				// var body = document.getElementsByTagName('body');
-				// if(body.length >= 1) { ajax.removeClass(body[0], 'loading'); };
 				try {
 					var resp = window[func](tag, responseData);
 					tag.innerHTML = resp;
@@ -105,8 +101,6 @@ ajax.loadTag = function(tag, url, func) {
 				tag.className = tag.className.replace(new RegExp('(\\s|^)loading(\\s|$)'), ' ').trim();
 			}, function(method, data, readyState, status, responseData) {
 				tag.className = tag.className.replace(new RegExp('(\\s|^)loading(\\s|$)'), ' ').trim();
-				// var body = document.getElementsByTagName('body');
-				// if(body.length >= 1) { ajax.removeClass(body[0], 'loading'); };
 			});
 		};
 	};
