@@ -87,26 +87,10 @@ ajax.post = function(url, data, callback, async) {
 	ajax.send(url, callback, 'POST', query.join('&'), async);
 };
 
-// TODO: rework later (remove duplicated code)
-ajax.hasClass = function(obj, className) {
-	return !!obj.className.match(new RegExp('(\\s|^)' + className + '(\\s|$)'));
-};
-
-ajax.addClass = function(obj, className) {
-	if(!ajax.hasClass(obj, className)) obj.className += " " + className;
-};
-
-ajax.removeClass = function(obj, className) {
-	if(ajax.hasClass(obj, className)) {
-		var reg = new RegExp('(\\s|^)' + className + '(\\s|$)');
-		obj.className = obj.className.replace(reg, ' ').trim();
-	};
-};
-
 ajax.loadTag = function(tag, url, func) {
 	if(typeof window[func] === 'function') {
-		if(!ajax.hasClass(tag, 'loading')) {
-			ajax.addClass(tag, 'loading');
+		if(!!!tag.className.match(new RegExp('(\\s|^)loading(\\s|$)'))) {
+			tag.className += " loading";
 			// var body = document.getElementsByTagName('body');
 			// if(body.length >= 1) { ajax.addClass(body[0], 'loading'); };
 			ajax.getJSON(url, {}, function(method, data, readyState, status, responseData) {
@@ -118,9 +102,9 @@ ajax.loadTag = function(tag, url, func) {
 				} catch(e) {
 					console.log('ajax.loadTag', 'e', e);
 				};
-				ajax.removeClass(tag, 'loading');
+				tag.className = tag.className.replace(new RegExp('(\\s|^)loading(\\s|$)'), ' ').trim();
 			}, function(method, data, readyState, status, responseData) {
-				ajax.removeClass(tag, 'loading');
+				tag.className = tag.className.replace(new RegExp('(\\s|^)loading(\\s|$)'), ' ').trim();
 				// var body = document.getElementsByTagName('body');
 				// if(body.length >= 1) { ajax.removeClass(body[0], 'loading'); };
 			});
