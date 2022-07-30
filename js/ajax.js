@@ -115,9 +115,9 @@ ajax.processTag = function(tag) {
 	var func = tag.getAttribute('data-ajax-func');
 	var field = tag.getAttribute('data-ajax-field');
 	var delay = tag.getAttribute('data-ajax-delay');
-	if(get && get != null && func && func != null) {
+	if((get && get != null) && ((func && func != null) || (field && field != null))) {
 		if(delay == null) {
-			ajax.loadTag(tag, get, func);
+			ajax.loadTag(tag, get, func, field);
 		} else {
 			setTimeout(function() {
 				ajax.loadTag(tag, get, func, field);
