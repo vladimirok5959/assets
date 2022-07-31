@@ -12,7 +12,7 @@
 	margin: 0;
 	overflow: visible;
 	padding: 6px 12px;
-	transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+	transition: box-shadow .15s ease-in-out;
 	vertical-align: middle;
 }
 
