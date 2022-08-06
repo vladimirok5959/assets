@@ -53,6 +53,7 @@ body,
 	.container,
 	.container-fluid,
 	.row.main,
+	.sidebar,
 	.content {
 		height: 100%;
 	}
