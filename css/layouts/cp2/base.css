@@ -83,12 +83,16 @@ body,
 		margin-left: 33.333333%;
 	}
 
-	.sidebar-left .scroll,
+	.sidebar .scroll,
 	.content .scroll {
 		height: 100%;
 		margin: 0px -15px;
 		overflow-y: auto;
 		padding: 15px 15px;
+	}
+
+	.sidebars-2 .sidebar {
+		height: 50%;
 	}
 }
 
@@ -119,6 +123,10 @@ body,
 		margin: 0px -15px;
 		overflow-y: auto;
 		padding: 15px 15px;
+	}
+
+	.sidebars-2 .sidebar {
+		height: 100%;
 	}
 }
 
