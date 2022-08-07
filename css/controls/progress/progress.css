@@ -1,0 +1,62 @@
+.progress {
+	background-color: #e9ecef;
+	border-radius: 0.25rem;
+	display: -ms-flexbox;
+	display: -webkit-box;
+	display: flex;
+	font-size: .75rem;
+	height: 1rem;
+	overflow: hidden;
+	position: relative;
+}
+
+.progress .progress-text {
+	color: #fff;
+	height: 100%;
+	position: absolute;
+	text-align: center;
+	text-shadow: 1px 1px 1px #000;
+	width: 100%;
+	z-index: 2;
+}
+
+.progress .progress-bar {
+	-ms-flex-direction: column;
+	-ms-flex-pack: center;
+	-webkit-box-direction: normal;
+	-webkit-box-orient: vertical;
+	-webkit-box-pack: center;
+	background-color: #d0d0d0;
+	background-image: linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);
+	background-size: 1rem 1rem;
+	color: #fff;
+	display: -ms-flexbox;
+	display: -webkit-box;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	position: relative;
+	text-align: center;
+	transition: width .6s ease;
+	z-index: 1;
+}
+
+/* Blue */
+.progress.blue .progress-bar {
+	background-color: #007bff;
+}
+
+/* Green */
+.progress.green .progress-bar {
+	background-color: #28a745;
+}
+
+/* Red */
+.progress.red .progress-bar {
+	background-color: #dc3545;
+}
+
+/* White */
+.progress.white .progress-bar {
+	background-color: #a3a3a3;
+}
