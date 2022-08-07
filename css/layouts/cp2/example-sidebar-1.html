@@ -8,11 +8,38 @@
 		<link rel="stylesheet" href="./../../reboot.css">
 		<link rel="stylesheet" href="./../../grid.css">
 		<link rel="stylesheet" href="./base.css">
+		<link rel="stylesheet" href="./navbar.css">
 	</head>
 	<body class="sidebars-1">
 		<header>
 			<div class="container-fluid">
-				Header
+				<nav>
+					<div class="navbar-header">
+						<a href="#" class="navbar-brand">Navigation Bar</a>
+						<a href="#" class="navbar-toggle" onclick="m=document.getElementById('navbarCollapse');if(m.className=='navbar-nav closed'){m.className='navbar-nav';}else{m.className='navbar-nav closed';}return false;">
+							<svg fill="#fff" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" width="30px" height="30px">
+								<path d="M 3 7 A 1.0001 1.0001 0 1 0 3 9 L 27 9 A 1.0001 1.0001 0 1 0 27 7 L 3 7 z M 3 14 A 1.0001 1.0001 0 1 0 3 16 L 27 16 A 1.0001 1.0001 0 1 0 27 14 L 3 14 z M 3 21 A 1.0001 1.0001 0 1 0 3 23 L 27 23 A 1.0001 1.0001 0 1 0 27 21 L 3 21 z" />
+							</svg>
+						</a>
+						<ul class="navbar-nav closed" id="navbarCollapse">
+							<li class="nav-item">
+								<a href="#" class="nav-link">Item 1</a>
+							</li>
+							<li class="nav-item">
+								<a href="#" class="nav-link">Item 2</a>
+							</li>
+							<li class="nav-item">
+								<a href="#" class="nav-link">Item 3</a>
+							</li>
+							<li class="nav-item">
+								<a href="#" class="nav-link">Item 4</a>
+							</li>
+							<li class="nav-item">
+								<a href="#" class="nav-link">Item 5</a>
+							</li>
+						</ul>
+					</div>
+				</nav>
 			</div>
 		</header>
 		<div class="container-fluid">
