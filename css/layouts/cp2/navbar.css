@@ -14,10 +14,12 @@ header nav {
 	height: 56px;
 	line-height: 20px;
 	padding: 17px 15px;
+	text-decoration: none;
 }
 
 .navbar-brand:hover {
 	color: #fff;
+	text-decoration: none;
 }
 
 .navbar-toggle {
@@ -56,13 +58,15 @@ header nav {
 }
 
 .nav-link {
-	color: #fff;
+	color: rgba(255, 255, 255, .5);
 	display: block;
 	padding: 8px 15px;
+	text-decoration: none;
 }
 
 .nav-link:hover {
-	color: #fff;
+	color: rgba(255, 255, 255, .75);
+	text-decoration: none;
 }
 
 @media (min-width: 768px) {
