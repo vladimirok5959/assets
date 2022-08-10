@@ -62,14 +62,14 @@ header nav {
 }
 
 .nav-link {
-	color: rgba(255, 255, 255, .5);
+	color: rgba(255, 255, 255, .75);
 	display: block;
 	padding: 8px 15px;
 	text-decoration: none;
 }
 
 .nav-link:hover {
-	color: rgba(255, 255, 255, .75);
+	color: rgba(255, 255, 255, 1);
 	text-decoration: none;
 }
 
@@ -94,6 +94,10 @@ header nav {
 		display: block;
 		float: left;
 		height: 56px;
+	}
+
+	.nav-item.right {
+		float: right;
 	}
 
 	.nav-link {
