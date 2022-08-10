@@ -160,7 +160,7 @@ header nav {
 		background-color: transparent;
 		border: 0;
 		clear: both;
-		color: #212529;
+		color: #1e375a;
 		display: block;
 		font-weight: 400;
 		padding: 0.25rem 1.5rem;
@@ -170,8 +170,8 @@ header nav {
 	}
 
 	.dropdown-item:hover {
-		background-color: #f1f1f1;
-		color: #16181b;
+		background-color: #eee;
+		color: #1e375a;
 		text-decoration: none;
 	}
 
