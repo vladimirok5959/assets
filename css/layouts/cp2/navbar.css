@@ -49,6 +49,12 @@ header nav {
 	top: 47px;
 }
 
+.navbar-nav ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
 .navbar-nav.closed {
 	display: none;
 }
