@@ -57,6 +57,10 @@ header nav {
 	border-bottom: 1px solid #35689c;
 }
 
+.nav-item:last-child {
+	border-bottom: none;
+}
+
 .nav-link {
 	color: rgba(255, 255, 255, .5);
 	display: block;
