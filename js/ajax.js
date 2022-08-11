@@ -170,6 +170,7 @@ ajax.reloadTagById = function(id) {
 };
 
 ajax.processFormSubmit = function(event) {
+	if(!event) var event = window.event;
 	event.preventDefault();
 	var form = event.target;
 	var func = form.getAttribute('data-ajax-func');
