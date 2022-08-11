@@ -87,6 +87,30 @@ ajax.post = function(url, data, callback, async) {
 	ajax.send(url, callback, 'POST', query.join('&'), async);
 };
 
+ajax.postJSON = function(url, data, callbackSuccess, callbackError, async) {
+	ajax.post(url, data, function(method, data, readyState, status, responseText) {
+		if(readyState == 4) {
+			if(status == 200) {
+				try {
+					var r = JSON.parse(responseText);
+					if(callbackSuccess) {
+						callbackSuccess(method, data, readyState, status, r);
+					};
+				} catch(e) {
+					if(callbackError) {
+						callbackError(method, data, readyState, status, e);
+					};
+				};
+			} else {
+				if(callbackError) {
+					var e = new AjaxErrorBadStatusCode('Bad status code '+status);
+					callbackError(method, data, readyState, status, e);
+				};
+			};
+		};
+	}, async);
+};
+
 ajax.loadTag = function(tag, url, func, field) {
 	if((typeof window[func] === 'function') || field != null) {
 		if(!!!tag.className.match(new RegExp('(\\s|^)loading(\\s|$)'))) {
@@ -145,8 +169,63 @@ ajax.reloadTagById = function(id) {
 	};
 };
 
+ajax.processFormSubmit = function(event) {
+	event.preventDefault();
+	var form = event.target;
+	var func = form.getAttribute('data-ajax-func');
+	if(func && func != null && typeof window[func] === 'function') {
+		if(!!!form.className.match(new RegExp('(\\s|^)loading(\\s|$)'))) {
+			form.className += " loading";
+			var data = {};
+			var inputs = form.querySelectorAll("input,select,textarea");
+			for(var i=0,m=inputs.length-1; i<=m; i++) {
+				data[inputs[i].name] = inputs[i].value;
+			};
+			var ajaxFunc = ajax.get;
+			if(form.method == "post") { ajaxFunc = ajax.post; };
+			ajaxFunc(form.action, data, function(method, data, readyState, status, responseText) {
+				var error = (readyState == 4 && status == 200);
+				var responseData = responseText;
+				try {
+					var responseData = JSON.parse(responseText);
+				} catch(e) {
+					console.log('ajax.processFormSubmit', 'e', e);
+				};
+				try {
+					window[func](form, responseData, error, readyState, status);
+				} catch(e) {
+					console.log('ajax.processFormSubmit', 'e', e);
+				};
+				form.className = form.className.replace(new RegExp('(\\s|^)loading(\\s|$)'), ' ').trim();
+			});
+		};
+	};
+};
+
+ajax.processForm = function(form) {
+	var is = form.getAttribute('data-ajax-form');
+	var func = form.getAttribute('data-ajax-func');
+	if((is && is != null && is == "true") && (func && func != null)) {
+		if(window.attachEvent) {
+			form.attachEvent('onsubmit', ajax.processFormSubmit);
+		} else if(window.addEventListener) {
+			form.addEventListener('submit', ajax.processFormSubmit, false);
+		};
+	};
+};
+
+ajax.processForms = function() {
+	var forms = document.querySelectorAll('[data-ajax-form]');
+	for(var key in forms) if(forms.hasOwnProperty(key)) {
+		var form = forms[key];
+		ajax.processForm(form);
+	};
+};
+
 if(window.attachEvent) {
 	window.attachEvent('onload', ajax.processTags);
+	window.attachEvent('onload', ajax.processForms);
 } else if(window.addEventListener) {
 	window.addEventListener('load', ajax.processTags, false);
+	window.addEventListener('load', ajax.processForms, false);
 };
