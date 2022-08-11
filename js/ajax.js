@@ -184,19 +184,21 @@ ajax.processFormSubmit = function(event) {
 			var ajaxFunc = ajax.get;
 			if(form.method == "post") { ajaxFunc = ajax.post; };
 			ajaxFunc(form.action, data, function(method, data, readyState, status, responseText) {
-				var error = (readyState == 4 && status == 200);
-				var responseData = responseText;
-				try {
-					var responseData = JSON.parse(responseText);
-				} catch(e) {
-					console.log('ajax.processFormSubmit', 'e', e);
+				if(readyState == 4) {
+					var error = (status == 200);
+					var responseData = responseText;
+					try {
+						var responseData = JSON.parse(responseText);
+					} catch(e) {
+						console.log('ajax.processFormSubmit', 'e', e);
+					};
+					try {
+						window[func](form, responseData, error, status);
+					} catch(e) {
+						console.log('ajax.processFormSubmit', 'e', e);
+					};
+					form.className = form.className.replace(new RegExp('(\\s|^)loading(\\s|$)'), ' ').trim();
 				};
-				try {
-					window[func](form, responseData, error, readyState, status);
-				} catch(e) {
-					console.log('ajax.processFormSubmit', 'e', e);
-				};
-				form.className = form.className.replace(new RegExp('(\\s|^)loading(\\s|$)'), ' ').trim();
 			});
 		};
 	};
