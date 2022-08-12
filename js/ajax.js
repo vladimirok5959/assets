@@ -1,7 +1,7 @@
 function AjaxErrorBadStatusCode(message) { this.name = 'AjaxErrorBadStatusCode'; this.message = message; };
 AjaxErrorBadStatusCode.prototype = new Error();
 
-var ajax = {};
+var ajax = {loaded: false};
 ajax.create = function() {
 	if(typeof XMLHttpRequest !== 'undefined') {
 		return new XMLHttpRequest();
@@ -225,10 +225,16 @@ ajax.processForms = function() {
 	};
 };
 
+ajax.load = function() {
+	if(!ajax.loaded) {
+		ajax.loaded = true;
+		ajax.processTags();
+		ajax.processForms();
+	};
+};
+
 if(window.attachEvent) {
-	window.attachEvent('onload', ajax.processTags);
-	window.attachEvent('onload', ajax.processForms);
+	window.attachEvent('onload', ajax.load);
 } else if(window.addEventListener) {
-	window.addEventListener('load', ajax.processTags, false);
-	window.addEventListener('load', ajax.processForms, false);
+	window.addEventListener('load', ajax.load, false);
 };
