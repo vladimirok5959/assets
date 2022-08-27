@@ -47,6 +47,14 @@ ajax.send = function(url, callback, method, data, async) {
 	a.send(data);
 };
 
+ajax.delete = function(url, data, callback, async) {
+	var query = [];
+	for(var key in data) {
+		query.push(encodeURIComponent(key) + '=' + encodeURIComponent(data[key]));
+	};
+	ajax.send(url + (query.length ? '?' + query.join('&') : ''), callback, 'DELETE', null, async);
+};
+
 ajax.get = function(url, data, callback, async) {
 	var query = [];
 	for(var key in data) {
@@ -225,11 +233,68 @@ ajax.processForms = function() {
 	};
 };
 
+ajax.processCheckboxClick = function(event) {
+	if(!event) var event = window.event;
+	event.preventDefault();
+	var checkbox = event.target;
+	var on = checkbox.getAttribute('data-ajax-on');
+	var off = checkbox.getAttribute('data-ajax-off');
+	var func = checkbox.getAttribute('data-ajax-func');
+	var box = checkbox.parentNode;
+	if(!!box.className.match(new RegExp('(\\s|^)loading(\\s|$)'))) {
+		event.preventDefault();
+		event.stopPropagation();
+		return false;
+	};
+	box.className += " loading";
+	ajax.post(checkbox.checked ? on : off, {}, function(method, data, readyState, status, responseText) {
+		if(readyState == 4) {
+			var error = (status == 200);
+			var responseData = responseText;
+			try {
+				var responseData = JSON.parse(responseText);
+			} catch(e) {
+				console.log('ajax.processCheckboxClick', 'e', e);
+			};
+			try {
+				window[func](checkbox, responseData, error, status);
+			} catch(e) {
+				console.log('ajax.processCheckboxClick', 'e', e);
+			};
+			box.className = box.className.replace(new RegExp('(\\s|^)loading(\\s|$)'), ' ').trim();
+		};
+	});
+	return true;
+};
+
+ajax.processCheckbox = function(checkbox) {
+	var is = checkbox.getAttribute('data-ajax-checkbox');
+	var on = checkbox.getAttribute('data-ajax-on');
+	var off = checkbox.getAttribute('data-ajax-off');
+	var func = form.getAttribute('data-ajax-func');
+	if((is && is != null && is == "true") && (on && on != null) && (off && off != null) && (func && func != null)) {
+		if(window.attachEvent) {
+			checkbox.attachEvent('onclick', ajax.processCheckboxClick);
+		} else if(window.addEventListener) {
+			checkbox.addEventListener('click', ajax.processCheckboxClick, false);
+		};
+	};
+};
+
+ajax.processCheckboxes = function() {
+	var checkboxes = document.querySelectorAll('[data-ajax-checkbox]');
+	for(var key in checkboxes) if(forms.hasOwnProperty(key)) {
+		var checkbox = checkboxes[key];
+		ajax.processCheckbox(checkbox);
+	};
+};
+
 ajax.load = function() {
 	if(!ajax.loaded) {
 		ajax.loaded = true;
 		ajax.processTags();
 		ajax.processForms();
+		ajax.processCheckboxes();
 	};
 };
 
