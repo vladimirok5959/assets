@@ -218,7 +218,7 @@ ajax.processFormSubmit = function(event) {
 			if(form.method == "post") { ajaxFunc = ajax.post; };
 			ajaxFunc(form.action, data, function(method, data, readyState, status, responseText) {
 				if(readyState == 4) {
-					var error = (status == 200);
+					var error = (status != 200);
 					var responseData = responseText;
 					try {
 						var responseData = JSON.parse(responseText);
@@ -259,7 +259,6 @@ ajax.processForms = function() {
 
 ajax.processCheckboxClick = function(event) {
 	if(!event) var event = window.event;
-	event.preventDefault();
 	var checkbox = event.target;
 	var on = checkbox.getAttribute('data-ajax-on');
 	var off = checkbox.getAttribute('data-ajax-off');
@@ -273,7 +272,7 @@ ajax.processCheckboxClick = function(event) {
 	box.className += " loading";
 	ajax.post(checkbox.checked ? on : off, {}, function(method, data, readyState, status, responseText) {
 		if(readyState == 4) {
-			var error = (status == 200);
+			var error = (status != 200);
 			var responseData = responseText;
 			try {
 				var responseData = JSON.parse(responseText);
@@ -284,6 +283,9 @@ ajax.processCheckboxClick = function(event) {
 				window[func](checkbox, responseData, error, status);
 			} catch(e) {
 				console.log('ajax.processCheckboxClick', 'e', e);
+			};
+			if(error) {
+				checkbox.checked = !checkbox.checked;
 			};
 			box.className = box.className.replace(new RegExp('(\\s|^)loading(\\s|$)'), ' ').trim();
 		};
