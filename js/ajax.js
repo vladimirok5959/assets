@@ -55,6 +55,30 @@ ajax.delete = function(url, data, callback, async) {
 	ajax.send(url + (query.length ? '?' + query.join('&') : ''), callback, 'DELETE', null, async);
 };
 
+ajax.deleteJSON = function(url, data, callbackSuccess, callbackError, async) {
+	ajax.delete(url, data, function(method, data, readyState, status, responseText) {
+		if(readyState == 4) {
+			if(status == 200) {
+				try {
+					var r = JSON.parse(responseText);
+					if(callbackSuccess) {
+						callbackSuccess(method, data, readyState, status, r);
+					};
+				} catch(e) {
+					if(callbackError) {
+						callbackError(method, data, readyState, status, e);
+					};
+				};
+			} else {
+				if(callbackError) {
+					var e = new AjaxErrorBadStatusCode('Bad status code '+status);
+					callbackError(method, data, readyState, status, e);
+				};
+			};
+		};
+	}, async);
+};
+
 ajax.get = function(url, data, callback, async) {
 	var query = [];
 	for(var key in data) {
