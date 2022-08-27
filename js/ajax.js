@@ -47,7 +47,7 @@ ajax.send = function(url, callback, method, data, async) {
 	a.send(data);
 };
 
-ajax.delete = function(url, data, callback, async) {
+ajax.del = function(url, data, callback, async) {
 	var query = [];
 	for(var key in data) {
 		query.push(encodeURIComponent(key) + '=' + encodeURIComponent(data[key]));
@@ -55,8 +55,8 @@ ajax.delete = function(url, data, callback, async) {
 	ajax.send(url + (query.length ? '?' + query.join('&') : ''), callback, 'DELETE', null, async);
 };
 
-ajax.deleteJSON = function(url, data, callbackSuccess, callbackError, async) {
-	ajax.delete(url, data, function(method, data, readyState, status, responseText) {
+ajax.delJSON = function(url, data, callbackSuccess, callbackError, async) {
+	ajax.del(url, data, function(method, data, readyState, status, responseText) {
 		if(readyState == 4) {
 			if(status == 200) {
 				try {
@@ -295,7 +295,7 @@ ajax.processCheckbox = function(checkbox) {
 	var is = checkbox.getAttribute('data-ajax-checkbox');
 	var on = checkbox.getAttribute('data-ajax-on');
 	var off = checkbox.getAttribute('data-ajax-off');
-	var func = form.getAttribute('data-ajax-func');
+	var func = checkbox.getAttribute('data-ajax-func');
 	if((is && is != null && is == "true") && (on && on != null) && (off && off != null) && (func && func != null)) {
 		if(window.attachEvent) {
 			checkbox.attachEvent('onclick', ajax.processCheckboxClick);
@@ -307,7 +307,7 @@ ajax.processCheckbox = function(checkbox) {
 
 ajax.processCheckboxes = function() {
 	var checkboxes = document.querySelectorAll('[data-ajax-checkbox]');
-	for(var key in checkboxes) if(forms.hasOwnProperty(key)) {
+	for(var key in checkboxes) if(checkboxes.hasOwnProperty(key)) {
 		var checkbox = checkboxes[key];
 		ajax.processCheckbox(checkbox);
 	};
