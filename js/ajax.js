@@ -41,7 +41,7 @@ ajax.send = function(url, callback, method, data, async) {
 		// 4 - DONE
 		callback(method, data, a.readyState, a.status, a.responseText);
 	};
-	if(method == 'POST') {
+	if(method == 'PUT' || method == 'POST') {
 		a.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 	};
 	a.send(data);
@@ -238,6 +238,7 @@ ajax.processFormSubmit = function(event) {
 	event.preventDefault();
 	var form = event.target;
 	var func = form.getAttribute('data-ajax-func');
+	var put = form.getAttribute('data-put');
 	if(func && func != null && typeof window[func] === 'function') {
 		if(!!!form.className.match(new RegExp('(\\s|^)loading(\\s|$)'))) {
 			form.className += " loading";
@@ -248,7 +249,7 @@ ajax.processFormSubmit = function(event) {
 			};
 			var ajaxFunc = ajax.get;
 			if(form.method == "post") { ajaxFunc = ajax.post; };
-			if(form.method == "put") { ajaxFunc = ajax.put; };
+			if(put && put != null && put == "true") { ajaxFunc = ajax.put; };
 			ajaxFunc(form.action, data, function(method, data, readyState, status, responseText) {
 				if(readyState == 4) {
 					var error = (status != 200);
