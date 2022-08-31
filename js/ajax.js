@@ -111,6 +111,38 @@ ajax.getJSON = function(url, data, callbackSuccess, callbackError, async) {
 	}, async);
 };
 
+ajax.put = function(url, data, callback, async) {
+	var query = [];
+	for (var key in data) {
+		query.push(encodeURIComponent(key) + '=' + encodeURIComponent(data[key]));
+	};
+	ajax.send(url, callback, 'PUT', query.join('&'), async);
+};
+
+ajax.putJSON = function(url, data, callbackSuccess, callbackError, async) {
+	ajax.put(url, data, function(method, data, readyState, status, responseText) {
+		if(readyState == 4) {
+			if(status == 200) {
+				try {
+					var r = JSON.parse(responseText);
+					if(callbackSuccess) {
+						callbackSuccess(method, data, readyState, status, r);
+					};
+				} catch(e) {
+					if(callbackError) {
+						callbackError(method, data, readyState, status, e);
+					};
+				};
+			} else {
+				if(callbackError) {
+					var e = new AjaxErrorBadStatusCode('Bad status code '+status);
+					callbackError(method, data, readyState, status, e);
+				};
+			};
+		};
+	}, async);
+};
+
 ajax.post = function(url, data, callback, async) {
 	var query = [];
 	for (var key in data) {
@@ -216,6 +248,7 @@ ajax.processFormSubmit = function(event) {
 			};
 			var ajaxFunc = ajax.get;
 			if(form.method == "post") { ajaxFunc = ajax.post; };
+			if(form.method == "put") { ajaxFunc = ajax.put; };
 			ajaxFunc(form.action, data, function(method, data, readyState, status, responseText) {
 				if(readyState == 4) {
 					var error = (status != 200);
