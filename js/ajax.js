@@ -26,9 +26,12 @@ ajax.create = function() {
 	return xhr;
 };
 
-ajax.send = function(url, callback, method, data, async) {
+ajax.send = function(url, callback, method, data, async, multipart) {
 	if(async === undefined) {
 		async = true;
+	};
+	if(multipart === undefined) {
+		multipart = false;
 	};
 	var a = ajax.create();
 	a.open(method, url, async);
@@ -42,7 +45,9 @@ ajax.send = function(url, callback, method, data, async) {
 		callback(method, data, a.readyState, a.status, a.responseText);
 	};
 	if(method == 'PUT' || method == 'POST') {
-		a.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+		if(!multipart) {
+			a.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+		};
 	};
 	a.send(data);
 };
@@ -111,15 +116,19 @@ ajax.getJSON = function(url, data, callbackSuccess, callbackError, async) {
 	}, async);
 };
 
-ajax.put = function(url, data, callback, async) {
-	var query = [];
-	for (var key in data) {
-		query.push(encodeURIComponent(key) + '=' + encodeURIComponent(data[key]));
+ajax.put = function(url, data, callback, async, multipart) {
+	if(multipart) {
+		ajax.send(url, callback, 'PUT', data, async, multipart);
+	} else {
+		var query = [];
+		for (var key in data) {
+			query.push(encodeURIComponent(key) + '=' + encodeURIComponent(data[key]));
+		};
+		ajax.send(url, callback, 'PUT', query.join('&'), async, multipart);
 	};
-	ajax.send(url, callback, 'PUT', query.join('&'), async);
 };
 
-ajax.putJSON = function(url, data, callbackSuccess, callbackError, async) {
+ajax.putJSON = function(url, data, callbackSuccess, callbackError, async, multipart) {
 	ajax.put(url, data, function(method, data, readyState, status, responseText) {
 		if(readyState == 4) {
 			if(status == 200) {
@@ -140,18 +149,22 @@ ajax.putJSON = function(url, data, callbackSuccess, callbackError, async) {
 				};
 			};
 		};
-	}, async);
+	}, async, multipart);
 };
 
-ajax.post = function(url, data, callback, async) {
-	var query = [];
-	for (var key in data) {
-		query.push(encodeURIComponent(key) + '=' + encodeURIComponent(data[key]));
+ajax.post = function(url, data, callback, async, multipart) {
+	if(multipart) {
+		ajax.send(url, callback, 'POST', data, async, multipart);
+	} else {
+		var query = [];
+		for (var key in data) {
+			query.push(encodeURIComponent(key) + '=' + encodeURIComponent(data[key]));
+		};
+		ajax.send(url, callback, 'POST', query.join('&'), async, multipart);
 	};
-	ajax.send(url, callback, 'POST', query.join('&'), async);
 };
 
-ajax.postJSON = function(url, data, callbackSuccess, callbackError, async) {
+ajax.postJSON = function(url, data, callbackSuccess, callbackError, async, multipart) {
 	ajax.post(url, data, function(method, data, readyState, status, responseText) {
 		if(readyState == 4) {
 			if(status == 200) {
@@ -172,7 +185,7 @@ ajax.postJSON = function(url, data, callbackSuccess, callbackError, async) {
 				};
 			};
 		};
-	}, async);
+	}, async, multipart);
 };
 
 ajax.loadTag = function(tag, url, func, field) {
@@ -242,10 +255,34 @@ ajax.processFormSubmit = function(event) {
 	if(func && func != null && typeof window[func] === 'function') {
 		if(!!!form.className.match(new RegExp('(\\s|^)loading(\\s|$)'))) {
 			form.className += " loading";
-			var data = {};
+			var data = null;
 			var inputs = form.querySelectorAll("input,select,textarea");
-			for(var i=0,m=inputs.length-1; i<=m; i++) {
-				data[inputs[i].name] = inputs[i].value;
+			var files = form.querySelectorAll("input[type=file]");
+			var multipart = files.length > 0;
+			if(!multipart) {
+				data = {};
+				var inputs = form.querySelectorAll("input,select,textarea");
+				for(var i=0,m=inputs.length-1; i<=m; i++) {
+					data[inputs[i].name] = inputs[i].value;
+				};
+			} else {
+				data = new FormData();
+				var inputs = form.querySelectorAll("input,select,textarea");
+				for(var i=0,m=inputs.length-1; i<=m; i++) {
+					if(inputs[i].type != 'file') {
+						data.append(inputs[i].name, inputs[i].value);
+					} else {
+						if(!multipart) {
+							multipart = true;
+						};
+					};
+				};
+				var files = form.querySelectorAll("input[type=file]");
+				for(var i=0,m=files.length-1; i<=m; i++) {
+					for(var j=0,k=files[i].files.length-1; j<=k; j++) {
+						data.append(files[i].name, files[i].files[j]);
+					};
+				};
 			};
 			var ajaxFunc = ajax.get;
 			if(form.method == "post") { ajaxFunc = ajax.post; };
@@ -266,7 +303,7 @@ ajax.processFormSubmit = function(event) {
 					};
 					form.className = form.className.replace(new RegExp('(\\s|^)loading(\\s|$)'), ' ').trim();
 				};
-			});
+			}, true, multipart);
 		};
 	};
 };
