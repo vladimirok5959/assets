@@ -2,6 +2,14 @@ function AjaxErrorBadStatusCode(message) { this.name = 'AjaxErrorBadStatusCode';
 AjaxErrorBadStatusCode.prototype = new Error();
 
 var ajax = {loaded: false};
+
+ajax.callTagsBefore = function(tag) {};
+ajax.callTagsAfter = function(tag) {};
+ajax.callFormsBefore = function(form) {};
+ajax.callFormsAfter = function(form) {};
+ajax.callCheckboxesBefore = function(box) {};
+ajax.callCheckboxesAfter = function(box) {};
+
 ajax.create = function() {
 	if(typeof XMLHttpRequest !== 'undefined') {
 		return new XMLHttpRequest();
@@ -191,6 +199,7 @@ ajax.postJSON = function(url, data, callbackSuccess, callbackError, async, multi
 ajax.loadTag = function(tag, url, func, field) {
 	if((typeof window[func] === 'function') || field != null) {
 		if(!!!tag.className.match(new RegExp('(\\s|^)loading(\\s|$)'))) {
+			ajax.callTagsBefore(tag);
 			tag.className += " loading";
 			ajax.getJSON(url, {}, function(method, data, readyState, status, responseData) {
 				try {
@@ -204,8 +213,10 @@ ajax.loadTag = function(tag, url, func, field) {
 					console.log('ajax.loadTag', 'e', e);
 				};
 				tag.className = tag.className.replace(new RegExp('(\\s|^)loading(\\s|$)'), ' ').trim();
+				ajax.callTagsAfter(tag);
 			}, function(method, data, readyState, status, responseData) {
 				tag.className = tag.className.replace(new RegExp('(\\s|^)loading(\\s|$)'), ' ').trim();
+				ajax.callTagsAfter(tag);
 			});
 		};
 	};
@@ -254,6 +265,7 @@ ajax.processFormSubmit = function(event) {
 	var put = form.getAttribute('data-put');
 	if(func && func != null && typeof window[func] === 'function') {
 		if(!!!form.className.match(new RegExp('(\\s|^)loading(\\s|$)'))) {
+			ajax.callFormsBefore(form);
 			form.className += " loading";
 			var data = null;
 			var inputs = form.querySelectorAll("input,select,textarea");
@@ -302,6 +314,7 @@ ajax.processFormSubmit = function(event) {
 						console.log('ajax.processFormSubmit', 'e', e);
 					};
 					form.className = form.className.replace(new RegExp('(\\s|^)loading(\\s|$)'), ' ').trim();
+					ajax.callFormsAfter(form);
 				};
 			}, true, multipart);
 		};
@@ -340,6 +353,7 @@ ajax.processCheckboxClick = function(event) {
 		event.stopPropagation();
 		return false;
 	};
+	ajax.callCheckboxesBefore(box);
 	box.className += " loading";
 	ajax.post(checkbox.checked ? on : off, {}, function(method, data, readyState, status, responseText) {
 		if(readyState == 4) {
@@ -359,6 +373,7 @@ ajax.processCheckboxClick = function(event) {
 				checkbox.checked = !checkbox.checked;
 			};
 			box.className = box.className.replace(new RegExp('(\\s|^)loading(\\s|$)'), ' ').trim();
+			ajax.callCheckboxesAfter(box);
 		};
 	});
 	return true;
