@@ -403,6 +403,11 @@ ajax.processCheckboxes = function() {
 
 ajax.load = function() {
 	if(!ajax.loaded) {
+		if(window.AjaxInit !== undefined) {
+			if(typeof window['AjaxInit'] === 'function') {
+				AjaxInit();
+			};
+		};
 		ajax.loaded = true;
 		ajax.processTags();
 		ajax.processForms();
