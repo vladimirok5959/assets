@@ -29,11 +29,14 @@ assets.sh
 
 Keep your CSS and JS files with `*.dev.css` and `*.dev.js` suffix. Run `make assets` command to process all finded files starting recursively from your makefile (root project) directory
 
-You can include CSS or JS files from internet into local file by `import()` command inside CSS or JS file. Check `/test/` directory and `/test/test.dev.css` file. For example:
+You can include CSS/JS local files or CSS/JS file from internet into local file by `import()` command inside CSS/JS file. Check `/test/` directory and `/test/test.dev.css` file. For example:
 
 ```css
 /* import(https://path/to/file/reset.css) */
 /* import(https://path/to/file/controls/checkbox/ios.css) */
+
+/* import(./local-file.css) */
+/* import(./another/local-file.css) */
 
 .example {
     background-color: red;
