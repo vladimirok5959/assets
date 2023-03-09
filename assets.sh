@@ -50,7 +50,17 @@ while read -r line; do
 
 				DATA_TO_IMPORT=""
 				if [[ ! -f "${CACHE_FILE}" ]]; then
-					DATA_TO_IMPORT=$(curl -s "${FILE_TO_IMPORT}")
+					# Local import
+					if [[ ${FILE_TO_IMPORT} == "./"* ]]; then
+						FILE_TO_IMPORT="$(dirname "${SOURCE_FILE}")$(echo "${FILE_TO_IMPORT}" | sed 's/^\.//')"
+						if [[ -f "${FILE_TO_IMPORT}" ]]; then
+							DATA_TO_IMPORT=$(cat "${FILE_TO_IMPORT}")
+						fi
+					fi
+					# Remote import
+					if [[ ${FILE_TO_IMPORT} == "http"* ]]; then
+						DATA_TO_IMPORT=$(curl -s "${FILE_TO_IMPORT}")
+					fi
 					echo "${DATA_TO_IMPORT}" > ${CACHE_FILE}
 				else
 					DATA_TO_IMPORT=$(cat ${CACHE_FILE})
