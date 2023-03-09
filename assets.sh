@@ -49,21 +49,23 @@ while read -r line; do
 				CACHE_FILE="${CURRENT_DIR}/.cache/${CACHE_NAME}"
 
 				DATA_TO_IMPORT=""
-				if [[ ! -f "${CACHE_FILE}" ]]; then
-					# Local import
-					if [[ ${FILE_TO_IMPORT} == "./"* ]]; then
-						FILE_TO_IMPORT="$(dirname "${SOURCE_FILE}")$(echo "${FILE_TO_IMPORT}" | sed 's/^\.//')"
-						if [[ -f "${FILE_TO_IMPORT}" ]]; then
-							DATA_TO_IMPORT=$(cat "${FILE_TO_IMPORT}")
-						fi
+
+				# Local import
+				if [[ ${FILE_TO_IMPORT} == "./"* ]]; then
+					FILE_TO_IMPORT="$(dirname "${SOURCE_FILE}")$(echo "${FILE_TO_IMPORT}" | sed 's/^\.//')"
+					if [[ -f "${FILE_TO_IMPORT}" ]]; then
+						DATA_TO_IMPORT=$(cat "${FILE_TO_IMPORT}")
 					fi
-					# Remote import
-					if [[ ${FILE_TO_IMPORT} == "http"* ]]; then
+				fi
+
+				# Remote import
+				if [[ ${FILE_TO_IMPORT} == "http"* ]]; then
+					if [[ ! -f "${CACHE_FILE}" ]]; then
 						DATA_TO_IMPORT=$(curl -s "${FILE_TO_IMPORT}")
+						echo "${DATA_TO_IMPORT}" > ${CACHE_FILE}
+					else
+						DATA_TO_IMPORT=$(cat ${CACHE_FILE})
 					fi
-					echo "${DATA_TO_IMPORT}" > ${CACHE_FILE}
-				else
-					DATA_TO_IMPORT=$(cat ${CACHE_FILE})
 				fi
 
 				echo "${DATA_TO_IMPORT}" >> ${TARGET_FILE}
