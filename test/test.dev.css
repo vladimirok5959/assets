@@ -4,3 +4,10 @@
 .example {
     background-color: red;
 }
+
+/* import(./local/test2.css) */
+/* import(./local/subdir/test3.css) */
+
+.example2 {
+    background-color: yellow;
+}
